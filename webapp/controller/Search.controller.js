@@ -54,7 +54,7 @@ sap.ui.define([
 					let sParam = this.getOwnerModel("oModelEstCal").getProperty("/searchParam");
 					aFilter.push(new Filter({
 						path: "CustId",
-						operator:  sParam.includes("*") ? FilterOperator.Contains :  FilterOperator.EQ,
+						operator:  sParam.includes("*") ? FilterOperator.EQ :  FilterOperator.EQ,
 						value1: sParam
 					}));
 					aFilter.push(new Filter({
