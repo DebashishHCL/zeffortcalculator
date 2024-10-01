@@ -1,0 +1,106 @@
+<mvc:View controllerName="com.zeffortcalculator.controller.Detail"
+	xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+	<Page id="page" title="Deal Summary" showNavButton="false" titleAlignment="Center">
+		<content>
+			<core:Fragment fragmentName="com.zeffortcalculator.view.fragment.HCL" type="XML" />
+				<VBox class="sapUiSmallMargin" width="auto">
+					<f:SimpleForm editable="false" layout="ColumnLayout" title="Details" columnsM="2" columnsL="3" columnsXL="4" width="auto">
+						<f:content>
+							<Label text="Customer ID" design="Bold"/>
+							<Text text="{oModelEstCal>/CustId}" />
+							<Label text="Customer Name" design="Bold" />
+							<Text text="{oModelEstCal>/CustName}" />
+							<Label text="Opportunity ID" design="Bold" />
+							<Text text="{oModelEstCal>/OpportunityId}" />
+							<Label text="Opportunity Name" design="Bold" />
+							<Text text="{oModelEstCal>/OppName}" />
+							<Label text="Version" design="Bold" />
+							<Text text="{oModelEstCal>/Version}" />
+							<Label text="Workpackage" design="Bold"/>
+							<Text text="{ path: 'oModelEstCal>/OppType', formatter: '.formatter.getWorkpackage' }"/>
+							<Label text="Price" design="Bold" />
+							<Text text="{oModelEstCal>/SrvcCst} {oModelEstCal>/Currency}" />
+							<Label text="Duration (weeks)" design="Bold"/>
+							<Text text="{oModelEstCal>/DurWeeks}" />
+							<Label text="Estimator Size" design="Bold"/>
+							<Text text="{ path: 'oModelSelectedBaseLine>/SystemSize', formatter: '.formatter.getSystemSize' }" />
+							<Label text="Created By" design="Bold"/>
+							<!-- <Text text="{oModelEstCal>/CreatedBy}" /> -->
+							<Text text="{oModelEstCal>/Email} ({oModelEstCal>/SuserId})" />
+						</f:content>
+					</f:SimpleForm>
+				</VBox>
+				<VBox class="sapUiSmallMargin" width="auto">
+					<f:SimpleForm editable="false" layout="ColumnLayout" title="Inputs" columnsM="2" columnsL="3" columnsXL="4" width="auto">
+						<f:content>
+							<Label text="Source System DB Size" design="Bold"/>
+							<Text text="{oModelEstCal>/SsDbSize} TB" />
+							<Label text="No. of Cycles" design="Bold" />
+							<!-- <Text text="{path:'oModelEstCal>/NoOfCycles', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:2,maxFractionDigits:2}, constraints:{precision:13,scale:2}}"  /> -->
+							<Text text="{oModelEstCal>/NoOfCycles}"/>
+							<Label text="High Complexity Functional Module" design="Bold" visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }" />
+							<Text text="{oModelEstCal>/HighComplexFm}" visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }" />
+							<Label text="Medium Complexity Functional Module" design="Bold" visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }" />
+							<Text text="{oModelEstCal>/MedComplexFm}" visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }" />
+							<Label text="Simple Complexity Functional Module" design="Bold" visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }" />
+							<Text text="{oModelEstCal>/SimComplexFm}" visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }" />
+							<Label text="ATC Violation Count" design="Bold" visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }"/>
+							<Text text="{oModelEstCal>/AtcViolCount}" visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }"/>
+							<Label text="Fiori Standard Apps Count" design="Bold" visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }"/>
+							<Text text="{oModelEstCal>/FioriStdAppCount}" visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }"/>
+							<Label text="Fiori Security Cataloug Roles" design="Bold" visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }"/>
+							<Text text="{oModelEstCal>/FioriSecCatRole}" visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }"/>
+							<Label text="Security Master Roles" design="Bold" visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }"/>
+							<Text text="{oModelEstCal>/SecMasterRole}" visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }"/>
+							<Label text="Interface Count" design="Bold" visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }"/>
+							<Text text="{oModelEstCal>/InterfaceCount}" visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }"/>
+							<Label text="Comments" design="Bold"/>
+							<Text text="{oModelEstCal>/Comments}"/>
+						</f:content>
+					</f:SimpleForm>
+				</VBox>
+			<VBox  class="">
+				<Table	inset="true" id="priceCal" visible="false" alternateRowColors="true" items="{oModelEstCal>/inputToPlatformEffortNav}" >
+					<headerToolbar>
+						<OverflowToolbar>
+							<content>
+								<Title text="Pricing Calculator" level="H2"/>
+								<ToolbarSpacer />
+								<Button icon="sap-icon://excel-attachment" type="Emphasized" press="onExport($event ,'priceCal')"/>
+							</content>
+						</OverflowToolbar>
+					</headerToolbar>
+					<columns>
+						<Column hAlign="Center">
+							<Label design="Bold" text="Effort Calculator"  />
+						</Column>
+						<Column >
+							<Label design="Bold" text="Price (Euros)" />
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem vAlign="Middle"  >
+							<cells >
+								<Text text="{oModelEstCal>EffType}" />
+								<Text text="{oModelEstCal>TotEffD}" textAlign="Right"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</VBox>
+		</content>
+		<footer>
+			<Toolbar  tooltip="Select action required">
+				<ToolbarSpacer  />
+				<Button id="detailEdit" type="Emphasized" icon="" text="Edit" class="sapUiSmallMarginBegin" press=".onEdit('E')"/>
+				<Button id="detailSearch" type="Emphasized" icon="sap-icon://search" text="Search" class="sapUiSmallMarginBegin" press=".onSearchCust"/>
+				<Button id="detailHome" type="Neutral" icon="sap-icon://home" text="Home Page" class="sapUiSmallMarginBegin" press="onHome"/>
+				
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

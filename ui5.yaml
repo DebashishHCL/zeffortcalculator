@@ -1,0 +1,31 @@
+specVersion: "3.1"
+metadata:
+  name: com.zeffortcalculator
+type: application
+server:
+  customMiddleware:
+    - name: fiori-tools-proxy
+      afterMiddleware: compression
+      configuration:
+        ignoreCertError: false
+        backend:
+          - path: /sap
+            url: https://f999ef23-91fd-4b9d-9ea7-edfa0a407b2a.abap.eu10.hana.ondemand.com
+            scp: true
+            destination: A10
+        ui5:
+          path:
+            - /resources
+            - /test-resources
+          url: https://ui5.sap.com
+    - name: fiori-tools-appreload
+      afterMiddleware: compression
+      configuration:
+        port: 35729
+        path: webapp
+        delay: 300
+    - name: fiori-tools-preview
+      afterMiddleware: fiori-tools-appreload
+      configuration:
+        component: com.zeffortcalculator
+        ui5Theme: sap_fiori_3

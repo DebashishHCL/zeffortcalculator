@@ -1,0 +1,95 @@
+<mvc:View controllerName="com.zeffortcalculator.controller.Search"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:mdc="sap.ui.mdc"
+    xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core"
+	xmlns:mdcValueHelp="sap.ui.mdc.valuehelp"
+	xmlns:smartMultiInput="sap.ui.comp.smartmultiinput"
+    xmlns:smartForm="sap.ui.comp.smartform"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:mdcValueHelpContent="sap.ui.mdc.valuehelp.content" >
+    
+	<Page id="page" title="Search" showNavButton="false" titleAlignment="Center"
+		navButtonPress=".onNavBack">
+        <content>
+		<core:Fragment fragmentName="com.zeffortcalculator.view.fragment.HCL" type="XML" />
+			<l:Grid defaultSpan="L12 M7 S12" width="auto">
+				<l:content>
+					<f:SimpleForm maxContainerCols="2" layout="ResponsiveLayout" editable="true" visible="true">
+							<f:content>
+								<Label text="Customer ID or Opportunity ID" design="Bold"/>
+								<!-- <Input value="" width="40%" id="idSearchBox"/> -->
+								<Input type="Text" placeholder="Enter Opportunity ID" width="40%" value="{oModelEstCal>/searchParam}" showValueHelp="true" valueHelpRequest="handleValueHelp" id="idSearchBox" />
+								<!-- <MultiInput width="40%"	valueHelpRequest=".onValueHelpRequested"> -->
+								<!-- </MultiInput> -->
+								<Label/>
+								<HBox>
+								<Button type="Emphasized" text="Search" press=".onSearch"/>		
+								</HBox>
+						</f:content>
+					</f:SimpleForm>
+				</l:content>
+			</l:Grid>	
+            
+            <VBox  class="">
+				<Table	inset="true" id="tbCustomer" items="{}" visible="false" alternateRowColors="true" updateFinished=".onUpdateFinished" >
+					<headerToolbar>
+						<OverflowToolbar>
+							<content>
+								<Title text="" level="H2"/>
+								<ToolbarSpacer />
+							</content>
+						</OverflowToolbar>
+					</headerToolbar>
+					<!-- <infoToolbar>
+						<OverflowToolbar >
+							<Label text="Customer Name" showColon="true" />
+							<Text text="Test Name" />
+							<Label text="Opportunity Name" showColon="true" />
+							<Text text="Test Opportunity" />
+						</OverflowToolbar>
+					</infoToolbar>					 -->
+					<columns>
+						<Column >
+							<Label design="Bold" text="Customer ID" wrapping="true" />
+						</Column>
+						<Column>
+							<Label design="Bold" text="Opportunity ID" wrapping="true"/>
+						</Column>
+						<Column hAlign="Left" >
+							<Label design="Bold" text="Version" textAlign="End"/>
+						</Column>
+						<Column minScreenWidth="Desktop" demandPopin="true"	hAlign="Left">
+							<Label design="Bold" text="Price" />
+						</Column>
+						<Column minScreenWidth="Desktop" demandPopin="true"	hAlign="Left"  >
+							<Label design="Bold" text="Created By" />
+						</Column>
+						<Column minScreenWidth="Desktop" demandPopin="true"	hAlign="Left"  >
+							<Label design="Bold" text="Created on" />
+						</Column>
+						<Column	minScreenWidth="Desktop" demandPopin="true"	hAlign="Left"  >
+							<Label design="Bold" text="Comment"/>
+						</Column>					
+					</columns>
+					<items>
+						<ColumnListItem  press=".onItemPress" type="Navigation" vAlign="Inherit">
+							<cells>
+								
+								<ObjectIdentifier title="{CustId}" />
+								<Text text="{OpportunityId}" />
+								<Text text="{Version}" textAlign="End"/>
+								<Text text="{SrvcCst} {Currency}" textAlign="Left"/>
+								<Text text="{Email}" textAlign="Left" />
+								<Text text="{ path: 'LastChangedOn', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'MMM dd,yyyy'}}" />
+								<Text text="{Comments}" textAlign="Left" />
+							</cells>
+						</ColumnListItem>					
+					</items>
+				</Table>
+				
+			</VBox>
+        </content>
+    </Page>
+</mvc:View>

@@ -1,0 +1,60 @@
+<core:FragmentDefinition
+	xmlns="sap.ui.comp.valuehelpdialog"
+	xmlns:m="sap.m"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:core="sap.ui.core">
+	<ValueHelpDialog
+		title="My Opportunity Ids"
+		ok=".onValueHelpOkPress"
+		cancel=".onValueHelpCancelPress"
+		afterClose=".onValueHelpAfterClose"
+		supportMultiselect="false"
+		type="Message"
+		enabledMultiSelectionPlugin="false"
+		keys="OpportunityId,CustId"
+		key="OpportunityId"
+		filterMode="true"
+		>
+		<filterBar>
+			<fb:FilterBar advancedMode="true" search=".onFilterBarSearch" isRunningInValueHelpDialog="true">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem
+						groupName="__$INTERNAL$"
+						name="OpportunityId"
+						label="Opportunity ID"
+						visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="OpportunityId" />
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem
+						groupName="__$INTERNAL$"
+						name="CustId"
+						label="Customer ID"
+						visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="CustId" />
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem
+						groupName="__$INTERNAL$"
+						name="CustName"
+						label="Customer Name"
+						visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="CustName" />
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem
+						groupName="__$INTERNAL$"
+						name="LastChangedOn"
+						label="Created On">
+						<fb:control>
+							<m:Input name="LastChangedOn" />
+						</fb:control>
+					</fb:FilterGroupItem>
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+	</ValueHelpDialog>
+</core:FragmentDefinition>

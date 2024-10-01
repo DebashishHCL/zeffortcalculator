@@ -1,0 +1,35 @@
+<mvc:View controllerName="com.zeffortcalculator.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core">
+    <Page id="page" title="{i18n>title}" showNavButton="false" titleAlignment="Center">
+        
+        <content>
+                <VBox alignItems="Center">
+                    <FlexBox
+                        alignItems="Center"
+                        justifyContent="Center" width="20%" class="sapUiSmallMarginTop">
+                        <Image  src="{
+                            value: 'com/zeffortcalculator/img/HCLTech.png',
+                            formatter: 'sap.ui.require.toUrl'
+                            }"  width="100%" class="sapUiSmallMarginTop"/>
+                        
+			        </FlexBox>
+                    <FlexBox
+                        alignItems="Center"
+                        justifyContent="Center" class="sapUiSmallMarginTop">
+                        <RadioButtonGroup  columns="1" width="100%">
+                            <RadioButton id="Choice1" text="Create New Request" selected="true"/>
+                            <RadioButton id="Choice2" text="Search Old Request" />
+                        </RadioButtonGroup>
+                        
+			        </FlexBox>
+                    <FlexBox
+                        alignItems="Center"
+                        justifyContent="Center" width="30%">
+                        <Button type="Emphasized" press="onChoice"	text="Submit" />
+			        </FlexBox>
+                </VBox>
+                        
+        </content>
+    </Page>
+</mvc:View>

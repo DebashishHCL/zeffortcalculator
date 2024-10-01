@@ -1,0 +1,110 @@
+<mvc:View controllerName="com.zeffortcalculator.controller.Calculate"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m" xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:tnt="sap.tnt" >
+    <Page id="page" title="Deal Parameters" showNavButton="false" titleAlignment="Center"
+		navButtonPress="onNavBackCalc">
+        <content>
+		<core:Fragment fragmentName="com.zeffortcalculator.view.fragment.HCL" type="XML" />
+		<l:Grid defaultSpan="L12 M7 S12" width="auto">
+			<l:content>
+				<f:SimpleForm maxContainerCols="2" layout="ResponsiveLayout" editable="true" visible="true">
+						<f:content>
+							<Label  text="Customer ID" design="Bold" />
+							<Text text="{oModelEstCal>/CustId}" />
+							<Label  text="Customer Name" design="Bold"/>
+							<Text text="{oModelEstCal>/CustName}" />
+							<Label text="Opportunity Name" design="Bold" />
+							<Text text="{oModelEstCal>/OppName}" />
+							<Label text="Opportunity ID" design="Bold"/>
+							<Text text="{oModelEstCal>/OpportunityId}" />
+							<Label text="Version" design="Bold"/>
+							<Text text="{oModelEstCal>/Version}" />
+							<Label  text="Work Package" design="Bold"/>
+							<Text text="{ path: 'oModelEstCal>/OppType', formatter: '.formatter.getWorkpackage' }"/>								
+							<Label text="Source System DB Size (in TB)" design="Bold" required="true" class="cutomRequired"/>
+							<HBox>
+								<Input id="SsDbSize" value="{path:'oModelEstCal>/SsDbSize', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:3,maxFractionDigits:3}, constraints:{precision:13,scale:3}}"  change=".onDBChange" liveChange=".onNegativeCheck" placeholder="Maximum value 10 TB"/>
+								<Text text="{ path: 'oModelSelectedBaseLine>/SystemSize', formatter: '.formatter.getSystemSize' }" class="sapUiSmallMarginBegin tSysSize" visible="{pgUiData>/showBaseLines}" />
+							</HBox>
+							<Label text="Number of Cycles" design="Bold" required="true" />
+							<HBox visible="true">					
+								<!-- <Input id="NoOfCycles"  value="{path:'oModelEstCal>/NoOfCycles', type:'sap.ui.model.odata.type.Decimal', formatOptions:{minFractionDigits:2,maxFractionDigits:2}, constraints:{precision:13,scale:2}}" type="Number"  liveChange=".checkwithBaseLine($event,'NoOfCycles')"/> -->
+								<Input id="NoOfCycles"  value="{oModelEstCal>/NoOfCycles}" type="Number"  liveChange=".checkwithBaseLine($event,'NoOfCycles')"/>
+								<Button icon="sap-icon://hint" type="Transparent" width="10%" press=".onRangeInfo($event,'NoOfCycles')"/>
+								<Text  text="{ parts: [	{ path: 'oModelSelectedBaseLine>/NoOfCycles' },{ path: 'rangeData>/NoOfCycles' }],	formatter: '.formatter.getBaseAndRangeInfo'}" class="sapUiSmallMarginBegin" visible="{pgUiData>/showBaseLines}"/>
+							</HBox>
+							
+							<Label id="L_HighComplexFm" text="High Complexity Functional Module" design="Bold" visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }"/>
+							<HBox visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }">
+								<Input id="HighComplexFm" value="{oModelEstCal>/HighComplexFm}" type="Number" liveChange=".checkwithBaseLine($event,'HighComplexFm')" />
+								<Button icon="sap-icon://hint" type="Transparent" width="10%" press=".onRangeInfo($event,'HighComplexFm')"/>
+								<Text  text="{ parts: [	{ path: 'oModelSelectedBaseLine>/HighComplexFm' },{ path: 'rangeData>/HighComplexFm' }],	formatter: '.formatter.getBaseAndRangeInfo'}" class="sapUiSmallMarginBegin" visible="{pgUiData>/showBaseLines}" />
+							</HBox>
+
+							<Label id="L_MedComplexFm" text="Medium Complexity Functional Module" design="Bold" visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }" />
+							<HBox visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }">
+								<Input id="MedComplexFm" value="{oModelEstCal>/MedComplexFm}" type="Number"  liveChange=".checkwithBaseLine($event,'MedComplexFm')" />
+								<Button icon="sap-icon://hint" type="Transparent" width="10%" press=".onRangeInfo($event,'MedComplexFm')" />
+								<Text  text="{ parts: [	{ path: 'oModelSelectedBaseLine>/MedComplexFm' },{ path: 'rangeData>/MedComplexFm' }],	formatter: '.formatter.getBaseAndRangeInfo'}" class="sapUiSmallMarginBegin" visible="{pgUiData>/showBaseLines}" />
+							</HBox>
+
+							<Label id="L_SimComplexFm" text="Simple Complexity Functional Module" design="Bold"  visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }"/>
+							<HBox visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }">
+								<Input id="SimComplexFm"  value="{oModelEstCal>/SimComplexFm}" type="Number"  liveChange=".checkwithBaseLine($event,'SimComplexFm')" />
+								<Button icon="sap-icon://hint" type="Transparent" width="10%" press=".onRangeInfo($event,'SimComplexFm')" />
+								<Text  text="{ parts: [	{ path: 'oModelSelectedBaseLine>/SimComplexFm' },{ path: 'rangeData>/SimComplexFm' }],	formatter: '.formatter.getBaseAndRangeInfo'}" class="sapUiSmallMarginBegin" visible="{pgUiData>/showBaseLines}" />
+							</HBox>
+
+							<Label id="L_AtcViolCount" text="ATC Violation Count" design="Bold" visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }" />
+							<HBox visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }">
+							<Input id="AtcViolCount" value="{oModelEstCal>/AtcViolCount}" type="Number"  liveChange=".checkwithBaseLine($event,'AtcViolCount')" />
+								<Button icon="sap-icon://hint" type="Transparent" width="10%" press=".onRangeInfo($event,'AtcViolCount')" />
+								<Text  text="{ parts: [	{ path: 'oModelSelectedBaseLine>/AtcViolCount' },{ path: 'rangeData>/AtcViolCount' }],	formatter: '.formatter.getBaseAndRangeInfo'}" class="sapUiSmallMarginBegin" visible="{pgUiData>/showBaseLines}" />
+							</HBox>
+
+							<Label id="L_FioriStdAppCount" text="Fiori Standard Apps Count" design="Bold" visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }"/>
+							<HBox visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }">
+								<Input id="FioriStdAppCount"  value="{oModelEstCal>/FioriStdAppCount}" type="Number"  liveChange=".checkwithBaseLine($event,'FioriStdAppCount')" />
+								<Button icon="sap-icon://hint" type="Transparent" width="10%" press=".onRangeInfo($event,'FioriStdAppCount')" />
+								<Text  text="{ parts: [	{ path: 'oModelSelectedBaseLine>/FioriStdAppCount' },{ path: 'rangeData>/FioriStdAppCount' }],	formatter: '.formatter.getBaseAndRangeInfo'}" class="sapUiSmallMarginBegin" visible="{pgUiData>/showBaseLines}" />
+							</HBox>
+
+							<Label id="L_FioriSecCatRole" text="Fiori Security Catalog Roles" design="Bold" visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }" />
+							<HBox visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }">
+								<Input id="FioriSecCatRole"  value="{oModelEstCal>/FioriSecCatRole}" type="Number"  liveChange=".checkwithBaseLine($event,'FioriSecCatRole')" />
+								<Button icon="sap-icon://hint" type="Transparent" width="10%" press=".onRangeInfo($event,'FioriSecCatRole')" />
+								<Text  text="{ parts: [	{ path: 'oModelSelectedBaseLine>/FioriSecCatRole' },{ path: 'rangeData>/FioriSecCatRole' }],	formatter: '.formatter.getBaseAndRangeInfo'}" class="sapUiSmallMarginBegin" visible="{pgUiData>/showBaseLines}" />
+							</HBox>
+							
+							<Label id="L_SecMasterRole" text="Security Master Roles" design="Bold" visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }"/>
+							<HBox visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }">
+								<Input id="SecMasterRole" value="{oModelEstCal>/SecMasterRole}" type="Number"  liveChange=".checkwithBaseLine($event,'SecMasterRole')" />
+								<Button icon="sap-icon://hint" type="Transparent" width="10%" press=".onRangeInfo($event,'SecMasterRole')" />
+								<Text  text="{ parts: [	{ path: 'oModelSelectedBaseLine>/SecMasterRole' },{ path: 'rangeData>/SecMasterRole' }],	formatter: '.formatter.getBaseAndRangeInfo'}" class="sapUiSmallMarginBegin" visible="{pgUiData>/showBaseLines}" />
+							</HBox>	
+							
+							<Label id="L_InterfaceCount" text="Interface Count" design="Bold" visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }"/>
+							<HBox visible="{ path: 'oModelEstCal>/OppType', formatter:'.formatter.getFVisible' }">
+								<Input id="InterfaceCount" value="{oModelEstCal>/InterfaceCount}" type="Number"  liveChange=".checkwithBaseLine($event,'InterfaceCount')" />
+								<Button icon="sap-icon://hint" type="Transparent" width="10%" press=".onRangeInfo($event,'InterfaceCount')" />
+								<Text  text="{ parts: [	{ path: 'oModelSelectedBaseLine>/InterfaceCount' },{ path: 'rangeData>/InterfaceCount' }],	formatter: '.formatter.getBaseAndRangeInfo'}" class="sapUiSmallMarginBegin" visible="{pgUiData>/showBaseLines}" />
+							</HBox>
+							
+							<Label text="Comments" design="Bold" />			
+							<TextArea value="{oModelEstCal>/Comments}" rows="5" width="40%" maxLength="250" valueState="{= ${oModelEstCal>/Comments}.length > 250 ? 'Warning' : 'None' }" showExceededText="true" liveChange=".onCommentsLength"/>
+							
+							<Label text=""/>
+							<HBox id="CalculateButtons" visible="true">
+								<Button id="calBtn" type="Emphasized" icon="sap-icon://save" text="Calculate &amp; Save" press=".onCalculate"/>				
+								<Button id="resetBtn" type="Neutral" icon="sap-icon://eraser" text="Reset" class="sapUiSmallMarginBegin" press=".onReset"/>
+								<Button id="homeBtn" type="Neutral" icon="sap-icon://home" text="Home Page" class="sapUiSmallMarginBegin" press=".onHome"/>
+							</HBox>
+					</f:content>
+				</f:SimpleForm>
+			</l:content>
+		</l:Grid>
+             
+        </content>
+    </Page>
+</mvc:View>
