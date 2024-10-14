@@ -26,7 +26,12 @@
                     <FlexBox
                         alignItems="Center"
                         justifyContent="Center" width="30%">
-                        <Button type="Emphasized" press="onChoice"	text="Submit" />
+                        <Button type="Emphasized" press=".onChoice"	text="Submit" />
+			        </FlexBox>
+                    <FlexBox
+                        alignItems="Center"
+                        justifyContent="Center" class="sapUiTinyMarginTop">
+                        <Link href="#" text="User Manual"  endIcon="sap-icon://inspect"/>
 			        </FlexBox>
                 </VBox>
                         

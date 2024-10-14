@@ -60,12 +60,16 @@
       "desktop": true,
       "tablet": true,
       "phone": true
-    }
+    },
+    "supportedThemes": [
+      "sap_horizon_hcb",
+      "sap_horizon"
+    ]
   },
   "sap.ui5": {
     "flexEnabled": true,
     "dependencies": {
-      "minUI5Version": "1.120.0",
+      "minUI5Version": "1.128.0",
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
@@ -98,6 +102,9 @@
       "rangeData": {
         "type": "sap.ui.model.json.JSONModel",
         "dataSource": "rangeSource"
+      },
+      "remotei18n": {
+        "type": "sap.ui.model.json.JSONModel"
       }
     },
     "resources": {
