@@ -1,0 +1,11 @@
+{
+    "NoOfCycles": 1,
+    "HighComplexFm": 1,
+    "MedComplexFm": 1,
+    "SimComplexFm": 1,
+    "AtcViolCount": 3000,
+    "FioriStdAppCount": 100,
+    "FioriSecCatRole": 200,
+    "SecMasterRole": 50,
+    "InterfaceCount": 100
+}

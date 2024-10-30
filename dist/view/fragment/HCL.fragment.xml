@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <Image src="{
+            value: 'com/zeffortcalculator/img/HCLTech.png',
+            formatter: 'sap.ui.require.toUrl'
+            }" width="7%" class="sapUiSmallMarginTop sapUiSmallMarginBegin" id="hclImg" />
+</core:FragmentDefinition>
