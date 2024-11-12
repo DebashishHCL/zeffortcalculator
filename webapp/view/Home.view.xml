@@ -32,9 +32,9 @@
                         alignItems="Center"
                         justifyContent="Center" class="sapUiTinyMarginTop">
                         <Link href="{
-                                    value: 'com/zeffortcalculator/file/UserManual.pptx',
+                                    value: 'com/zeffortcalculator/file/UserManual.pdf',
                                     formatter: 'sap.ui.require.toUrl'
-                                    }" text="User Manual"  endIcon="sap-icon://inspect" target="_self"/>
+                                    }" text="User Manual"  endIcon="sap-icon://inspect" target="_blank"/>
 			        </FlexBox>
                 </VBox>
                         

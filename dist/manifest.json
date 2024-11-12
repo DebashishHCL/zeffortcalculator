@@ -36,7 +36,7 @@
                     "semanticObject": "PricingCalculator",
                     "action": "Display",
                     "title": "{{flpTitle}}",
-                    "subTitle": "External",
+                    "subTitle": "SAP SE",
                     "icon": "sap-icon://simulate",
                     "signature": {
                         "parameters": {},
